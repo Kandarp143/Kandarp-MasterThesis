@@ -1,0 +1,22 @@
+<svg [attr.width]="grid_width" [attr.height]="grid_height" (mousemove)="setTargetCell($event)" xmlns="http://www.w3.org/2000/svg">
+  <!-- Horizontal Lines -->
+  <g *ngFor="let row of rows; index as i">
+    <line [attr.x1]="distorted[row[0]][0]" [attr.x2]="distorted[row[1]][0]"
+          [attr.y1]="distorted[row[0]][1]" [attr.y2]="distorted[row[1]][1]"
+          fill="none" stroke="gray" stroke-width="1"
+    />
+  </g>
+  <!-- Vertical Lines -->
+  <g *ngFor="let column of columns; index as i">
+    <line [attr.x1]="distorted[column[0]][0]" [attr.x2]="distorted[column[1]][0]"
+          [attr.y1]="distorted[column[0]][1]" [attr.y2]="distorted[column[1]][1]"
+          fill="none" stroke="gray" stroke-width="1"
+    />
+  </g>
+  <g *ngIf="showNumberPopup()">
+    <!-- Focused Cell Number -->
+    <text [attr.x]="grid_padding + cell_width * (focused_column + 0.5)" [attr.y]="10 + grid_padding + cell_height * (focused_row + 0.5)"
+          text-anchor="middle" font-family="Verdana" font-size="24" fill="blue">{{getTargetCellData()}}
+    </text>
+  </g>
+</svg>

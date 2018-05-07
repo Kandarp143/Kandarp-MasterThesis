@@ -1,0 +1,21 @@
+<svg [attr.width]="grid_width" [attr.height]="grid_height" (mousemove)="setTargetCell($event)" xmlns="http://www.w3.org/2000/svg">
+  <!-- Draw the grid as rectangles -->
+  <g *ngFor="let column of columns; index as ci">
+    <g *ngFor="let row of rows; index as ri">
+      <rect [attr.x]="grid_padding + ci * cell_width" [attr.y]="grid_padding + ri * cell_height"
+            [attr.width]="cell_width" [attr.height]="cell_height" fill="none" stroke="gray" stroke-width="1"
+      />
+    </g>
+  </g>
+  <g *ngIf="showNumberPopup()">
+    <!-- Yellow Overlap Rectangle -->
+    <rect [attr.x]="grid_padding - overlap_padding + focused_column * cell_width" [attr.y]="grid_padding - overlap_padding + focused_row * cell_height"
+          [attr.width]="cell_width + 2 * overlap_padding" [attr.height]="cell_height + 2 * overlap_padding" fill="yellow" stroke="black" stroke-width="1"
+    />
+    <!-- Blue Text -->
+    <text [attr.x]="grid_padding + (focused_column + 0.5) * cell_width" [attr.y]="grid_padding + (focused_row + 0.75) * cell_height"
+          text-anchor="middle" font-family="Verdana" font-size="24" fill="blue">{{getTargetCellData()}}
+    </text>
+
+  </g>
+</svg>
