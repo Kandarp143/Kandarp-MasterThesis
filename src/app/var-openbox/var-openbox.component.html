@@ -1,4 +1,5 @@
-<svg [attr.width]="grid_width" [attr.height]="grid_height" (mousemove)="setTargetCell($event)" xmlns="http://www.w3.org/2000/svg">
+<svg [attr.width]="grid_width" [attr.height]="grid_height" (mousemove)="setTargetCell($event)"
+     xmlns="http://www.w3.org/2000/svg">
   <!-- Horizontal Lines -->
   <g *ngFor="let row of rows; index as i">
     <line [attr.x1]="distorted[row[0]][0]" [attr.x2]="distorted[row[1]][0]"
@@ -15,30 +16,35 @@
   </g>
   <g *ngIf="showNumberPopup()">
     <!-- Centre number -->
-    <text [attr.x]="grid_padding + cell_width * (focused_column + 0.5)" [attr.y]="10 + grid_padding + cell_height * (focused_row + 0.5)"
+    <text [attr.x]="grid_padding + cell_width * (focused_column + 0.5)"
+          [attr.y]="10 + grid_padding + cell_height * (focused_row + 0.5)"
           text-anchor="middle" font-family="Verdana" font-size="24" fill="blue">{{getTargetCellData()}}
     </text>
     <!-- Upper number -->
     <g *ngIf="focused_row > 0">
-      <text [attr.x]="grid_padding + cell_width * (focused_column + 0.5)" [attr.y]="grid_padding + cell_height * (focused_row - 0.5)"
+      <text [attr.x]="grid_padding + cell_width * (focused_column + 0.5)"
+            [attr.y]="grid_padding + cell_height * (focused_row - 0.5)"
             text-anchor="middle" font-family="Verdana" font-size="12" fill="gray">{{getOffCellData("up")}}
       </text>
     </g>
     <!-- Lower number -->
     <g *ngIf="focused_row < row_count - 1">
-      <text [attr.x]="grid_padding + cell_width * (focused_column + 0.5)" [attr.y]="10 + grid_padding + cell_height * (focused_row + 1.5)"
+      <text [attr.x]="grid_padding + cell_width * (focused_column + 0.5)"
+            [attr.y]="10 + grid_padding + cell_height * (focused_row + 1.5)"
             text-anchor="middle" font-family="Verdana" font-size="12" fill="gray">{{getOffCellData("down")}}
       </text>
     </g>
     <!-- Left number -->
     <g *ngIf="focused_column > 0">
-      <text [attr.x]="grid_padding - 5 + cell_width * (focused_column - 0.5)" [attr.y]="5 + grid_padding + cell_height * (focused_row + 0.5)"
+      <text [attr.x]="grid_padding - 5 + cell_width * (focused_column - 0.5)"
+            [attr.y]="5 + grid_padding + cell_height * (focused_row + 0.5)"
             text-anchor="middle" font-family="Verdana" font-size="12" fill="gray">{{getOffCellData("left")}}
       </text>
     </g>
     <!-- Right number -->
     <g *ngIf="focused_column < column_count - 1">
-      <text [attr.x]="grid_padding + 5 + cell_width * (focused_column + 1.5)" [attr.y]="5 + grid_padding + cell_height * (focused_row + 0.5)"
+      <text [attr.x]="grid_padding + 5 + cell_width * (focused_column + 1.5)"
+            [attr.y]="5 + grid_padding + cell_height * (focused_row + 0.5)"
             text-anchor="middle" font-family="Verdana" font-size="12" fill="gray">{{getOffCellData("right")}}
       </text>
     </g>
@@ -49,3 +55,17 @@
     /> -->
   </g>
 </svg>
+
+
+<!-- Text -------------------------------------------------------------------->
+<h4>Open Box view</h4>
+<p class="text-justify">
+  As the name suggest, the view of this variant is like an open box. Under this variant when user moves the courser to
+  the focused cell, the result will display the information of the focused cell plus the surrounding cells majority the
+  four joints of the focused cell. Those edges cell can be displayed by using the different colors as the indicator.
+  Those colors will be based on the regions or informations mentioned in that table.
+</p>
+<p class="text-justify">
+  In this variant, the Table Lens will remove static control and keep neighbor context. The base distortion is made by
+  us in this variant by keeping in mind that the user should not be misguided or distracted.
+</p>

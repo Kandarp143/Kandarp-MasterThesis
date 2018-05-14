@@ -1,6 +1,19 @@
+<!-- Text -------------------------------------------------------------------->
+<h4>Region selection View</h4>
+<p class="text-justify p-1">
+  Its still a challenge for developers to manage millions of records in a single data base with making it most
+  user-friendly display. All the above-mentioned vari- ants are making visualization of user better related to focused
+  value. And also providing neighborhood context to the user for better results of their require- ments. But all the
+  above-mentioned variants does not include large datasets into one table
+</p>
+<p class="text-justify p-1">
+  What if we need a requirement to make each cells size to pixel for display the whole table in single page. This
+  technique will be utilized in this variant. This variant will make user select a specific region, where he/she wants
+  to focus on and then select the visualization looks which are mentioned in the above variants.
+</p>
 <!-- Changes the variant that is selected -->
 <div id="grid-controls" (wheel)="$event.stopPropagation()">
-  <select [(ngModel)]="current_variant" >
+  <select [(ngModel)]="current_variant">
     <option *ngFor="let v of variants" [value]="v">{{v}}</option>
   </select>
   <p (wheel)="handleResizeRegion($event, 'w')">Width: {{subgrid_columns}}</p>
@@ -22,7 +35,7 @@
       </g>
     </g>
     <!-- Draw the selected region -->
-    <g  *ngIf="showNumberPopup()">
+    <g *ngIf="showNumberPopup()">
       <rect [attr.x]="grid_padding + cell_size * subgrid_offset_x"
             [attr.y]="grid_padding + cell_size * subgrid_offset_y"
             [attr.width]="subgrid_columns * cell_size" [attr.height]="subgrid_rows * cell_size"
@@ -30,7 +43,7 @@
       />
     </g>
     <!-- Draw the new drag region -->
-    <g  *ngIf="is_resizing_region">
+    <g *ngIf="is_resizing_region">
       <rect [attr.x]="grid_padding + cell_size * drag_offset_x"
             [attr.y]="grid_padding + cell_size * drag_offset_y "
             [attr.width]="drag_width * cell_size" [attr.height]="drag_height * cell_size"
@@ -41,16 +54,18 @@
   <!-- Displays the variant subgrid that is selected here -->
   <ng-container [ngSwitch]="current_variant">
     <app-var-overlap *ngSwitchCase="'overlap'"
-                      [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
-                      [row-count]="subgrid_rows" [column-count]="subgrid_columns"
-                      [grid-data]="region_data"></app-var-overlap>
+                     [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
+                     [row-count]="subgrid_rows" [column-count]="subgrid_columns"
+                     [grid-data]="region_data"></app-var-overlap>
     <app-var-openbox *ngSwitchCase="'open box'"
-                  [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
-                  [row-count]="subgrid_rows" [column-count]="subgrid_columns"
-                  [grid-data]="region_data"></app-var-openbox>
+                     [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
+                     [row-count]="subgrid_rows" [column-count]="subgrid_columns"
+                     [grid-data]="region_data"></app-var-openbox>
     <app-var-wall *ngSwitchCase="'perspective wall'"
-                          [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
-                          [row-count]="subgrid_rows" [column-count]="subgrid_columns" [distort-factor]="0.8"
-                          [grid-data]="region_data"></app-var-wall>
+                  [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
+                  [row-count]="subgrid_rows" [column-count]="subgrid_columns" [distort-factor]="0.8"
+                  [grid-data]="region_data"></app-var-wall>
   </ng-container>
 </div>
+
+
