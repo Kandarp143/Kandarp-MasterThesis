@@ -1,1 +1,36 @@
-z
+:host {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+#grid-box {
+  display: flex;
+}
+
+#grid-controls {
+  display: flex;
+}
+
+#grid-controls p {
+  margin: 10px 0 0 10px;
+  line-height: 32px;
+  padding: 0 4px;
+  background-color: antiquewhite;
+  color: black;
+}
+
+#grid-controls p#input-instructions {
+  background-color: white;
+  font-size: 0.8em;
+}
+
+p#left-instructions {
+  margin: 10px 0 0 20px;
+}
+
+select {
+  margin: 10px 0 0 20px;
+  height: 32px;
+  width: 200px;
+}

@@ -1,3 +1,56 @@
-<p>
-  var-region works!
-</p>
+<!-- Changes the variant that is selected -->
+<div id="grid-controls" (wheel)="$event.stopPropagation()">
+  <select [(ngModel)]="current_variant" >
+    <option *ngFor="let v of variants" [value]="v">{{v}}</option>
+  </select>
+  <p (wheel)="handleResizeRegion($event, 'w')">Width: {{subgrid_columns}}</p>
+  <p (wheel)="handleResizeRegion($event, 'h')">Height: {{subgrid_rows}}</p>
+  <p id="input-instructions">(mouseover and use wheel to change dimensions of region select)</p>
+</div>
+<p id="left-instructions">Hold left mouse button and drag to select new region.</p>
+<div id="grid-box">
+  <!-- Region Select Grid -->
+  <svg [attr.width]="grid_width" [attr.height]="grid_height"
+       (mousemove)="setTargetCell($event)" (mousedown)="setClickStart($event)" (mouseup)="handleClickEnd($event)"
+       xmlns="http://www.w3.org/2000/svg">
+    <!-- The grid is drawn as rectangles -->
+    <g *ngFor="let column of columns; index as ci">
+      <g *ngFor="let row of rows; index as ri">
+        <rect [attr.x]="grid_padding + ci * cell_size" [attr.y]="grid_padding + ri * cell_size"
+              [attr.width]="cell_size" [attr.height]="cell_size" fill="none" stroke="gray" stroke-width="1"
+        />
+      </g>
+    </g>
+    <!-- Draw the selected region -->
+    <g  *ngIf="showNumberPopup()">
+      <rect [attr.x]="grid_padding + cell_size * subgrid_offset_x"
+            [attr.y]="grid_padding + cell_size * subgrid_offset_y"
+            [attr.width]="subgrid_columns * cell_size" [attr.height]="subgrid_rows * cell_size"
+            fill="yellow" stroke="blue" stroke-width="1"
+      />
+    </g>
+    <!-- Draw the new drag region -->
+    <g  *ngIf="is_resizing_region">
+      <rect [attr.x]="grid_padding + cell_size * drag_offset_x"
+            [attr.y]="grid_padding + cell_size * drag_offset_y "
+            [attr.width]="drag_width * cell_size" [attr.height]="drag_height * cell_size"
+            fill="green" stroke="none" stroke-width="1"
+      />
+    </g>
+  </svg>
+  <!-- Displays the variant subgrid that is selected here -->
+  <ng-container [ngSwitch]="current_variant">
+    <app-var-overlap *ngSwitchCase="'overlap'"
+                      [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
+                      [row-count]="subgrid_rows" [column-count]="subgrid_columns"
+                      [grid-data]="region_data"></app-var-overlap>
+    <app-var-openbox *ngSwitchCase="'open box'"
+                  [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
+                  [row-count]="subgrid_rows" [column-count]="subgrid_columns"
+                  [grid-data]="region_data"></app-var-openbox>
+    <app-var-wall *ngSwitchCase="'perspective wall'"
+                          [cell-height]="subgrid_cell_height" [cell-width]="subgrid_cell_width"
+                          [row-count]="subgrid_rows" [column-count]="subgrid_columns" [distort-factor]="0.8"
+                          [grid-data]="region_data"></app-var-wall>
+  </ng-container>
+</div>

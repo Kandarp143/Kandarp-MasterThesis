@@ -1,7 +1,15 @@
+// core components
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+// router
 import { routes } from './app.router';
+
+// main component - bootstrap
 import { AppComponent } from './app.component';
+
+// additional component
 import { VarOverlapComponent } from './var-overlap/var-overlap.component';
 import { VarOpenboxComponent } from './var-openbox/var-openbox.component';
 import { VarWallComponent } from './var-wall/var-wall.component';
@@ -21,6 +29,7 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     routes
   ],
   providers: [],
