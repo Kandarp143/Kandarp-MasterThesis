@@ -6,6 +6,11 @@
       <rect [attr.x]="grid_padding + ci * cell_width" [attr.y]="grid_padding + ri * cell_height"
             [attr.width]="cell_width" [attr.height]="cell_height" fill="none" stroke="gray" stroke-width="1"
       />
+      <!-- Blue Text -->
+      <text [attr.x]="grid_padding+grid_padding/1.5 + ci * cell_width"
+            [attr.y]="grid_padding+grid_padding + ri * cell_height"
+            text-anchor="middle" font-family="Verdana" font-size="12" fill="blue">{{(ci)+':'+(ri)}}
+      </text>
     </g>
   </g>
   <g *ngIf="showNumberPopup()">
@@ -13,7 +18,7 @@
     <rect [attr.x]="grid_padding - overlap_padding + focused_column * cell_width"
           [attr.y]="grid_padding - overlap_padding + focused_row * cell_height"
           [attr.width]="cell_width + 2 * overlap_padding" [attr.height]="cell_height + 2 * overlap_padding"
-          fill="yellow" stroke="black" stroke-width="1"
+          fill="white" stroke="black" stroke-width="1"
     />
     <!-- Blue Text -->
     <text [attr.x]="grid_padding + (focused_column + 0.5) * cell_width"

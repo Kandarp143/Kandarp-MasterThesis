@@ -43,7 +43,7 @@ export class VarOverlapComponent implements OnInit {
     this.setLines();
   }
 
-  readonly default_row_count = 10;
+  readonly default_row_count = 20;
   private input_row_count_;
 
   get column_count() {
@@ -56,7 +56,7 @@ export class VarOverlapComponent implements OnInit {
     this.setLines();
   }
 
-  readonly default_column_count = 20;
+  readonly default_column_count = 45;
   private input_column_count_;
 
   // The increased size of the overlap box i.e. cell_size + 2 * over_lap padding
@@ -128,6 +128,17 @@ export class VarOverlapComponent implements OnInit {
     } else {
       return this.grid_data[index];
     }
+  }
+
+  getDefaultCellData() {
+    // let index2 = this.focused_column + (this.focused_row * this.column_count)
+    // if (!this.grid_data) {
+    //   return index2 + 1;
+    // } else {
+    //   return this.grid_data[index2];
+    // }
+
+    return this.focused_column;
   }
 
   // Determines if a cell is focused

@@ -44,7 +44,7 @@ export class VarWallComponent implements OnInit {
     this.setEdges();
   };
 
-  readonly default_row_count = 10;
+  readonly default_row_count = 20;
   private input_row_count_;
 
   get column_count() {
@@ -58,7 +58,7 @@ export class VarWallComponent implements OnInit {
     this.setEdges();
   };
 
-  readonly default_column_count = 20;
+  readonly default_column_count = 45;
   private input_column_count_;
 
   // This is the data that can be passed into this component to display in the gird cells
