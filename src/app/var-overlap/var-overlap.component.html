@@ -9,7 +9,7 @@
       <!-- Blue Text -->
       <text [attr.x]="grid_padding+grid_padding/1.5 + ci * cell_width"
             [attr.y]="grid_padding+grid_padding + ri * cell_height"
-            text-anchor="middle" font-family="Verdana" font-size="12" fill="blue">{{(ci)+':'+(ri)}}
+            text-anchor="middle" font-family="Verdana" font-size="10" fill="blue">{{getDefaultCellData(ci,ri)}}
       </text>
     </g>
   </g>

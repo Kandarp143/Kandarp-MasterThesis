@@ -1,15 +1,19 @@
-import { Component, OnInit, HostListener, HostBinding, Input} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  HostBinding,
+  Input
+} from "@angular/core";
 
 @Component({
-  selector: 'app-var-overlap',
-  templateUrl: './var-overlap.component.html',
-  styleUrls: ['./var-overlap.component.css']
+  selector: "app-var-overlap",
+  templateUrl: "./var-overlap.component.html",
+  styleUrls: ["./var-overlap.component.css"]
 })
 export class VarOverlapComponent implements OnInit {
-
   // Inputs
-  @Input("grid-padding")
-  grid_padding = 20;
+  @Input("grid-padding") grid_padding = 20;
 
   get cell_width() {
     return this.cell_width_;
@@ -60,12 +64,10 @@ export class VarOverlapComponent implements OnInit {
   private input_column_count_;
 
   // The increased size of the overlap box i.e. cell_size + 2 * over_lap padding
-  @Input("overlap-padding")
-  overlap_padding = 10;
+  @Input("overlap-padding") overlap_padding = 10;
 
   // This is the data that can be passed into this component to display in the gird cells
-  @Input("grid-data")
-  grid_data: number[];
+  @Input("grid-data") grid_data: number[];
 
   // Currently focused row and column
   focused_row: number = -1;
@@ -86,7 +88,8 @@ export class VarOverlapComponent implements OnInit {
   rows: number[] = [];
   columns: number[] = [];
 
-  constructor() { };
+  default_count = 0;
+  constructor() {}
 
   ngOnInit() {
     this.setLines();
@@ -94,20 +97,17 @@ export class VarOverlapComponent implements OnInit {
 
   // Handle mouse move events to update the targeted grid cell
   setTargetCell(event: MouseEvent) {
-
     let tag = (<HTMLElement>event.target).tagName;
     if (tag !== "svg") return false;
 
     let x = Math.floor((event.offsetX - this.grid_padding) / this.cell_width_);
     let y = Math.floor((event.offsetY - this.grid_padding) / this.cell_height_);
 
-
-
     if (x < 0 || y < 0 || x >= this.column_count || y >= this.row_count) {
       this.clearFocusedCell(event);
     } else {
-      console.log('focused_row'+y);
-      console.log('focused_column'+x);
+      console.log("focused_row" + y);
+      console.log("focused_column" + x);
       this.focused_row = y;
       this.focused_column = x;
     }
@@ -122,7 +122,7 @@ export class VarOverlapComponent implements OnInit {
 
   // Gets the data that is displayed in the focused cell
   getTargetCellData() {
-    let index = this.focused_column + (this.focused_row * this.column_count)
+    let index = this.focused_column + this.focused_row * this.column_count;
     if (!this.grid_data) {
       return index + 1;
     } else {
@@ -130,15 +130,19 @@ export class VarOverlapComponent implements OnInit {
     }
   }
 
-  getDefaultCellData() {
-    // let index2 = this.focused_column + (this.focused_row * this.column_count)
-    // if (!this.grid_data) {
-    //   return index2 + 1;
-    // } else {
-    //   return this.grid_data[index2];
-    // }
+  getDefaultCellData(col: number, row: number) {
+    console.log('called default cell data');
+    // vartical
 
-    return this.focused_column;
+    // return row + col * this.default_row_count + 1;
+    // horizontal
+    return col + row * this.default_column_count + 1;
+    // random
+    // return Math.floor(Math.random() * 999 + 1);
+    // odd
+    // return row * 2 + col * this.default_row_count + 1;
+    // odd
+    // return (row + 1) * 2 + col * this.default_row_count;
   }
 
   // Determines if a cell is focused
