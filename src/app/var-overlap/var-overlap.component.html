@@ -1,29 +1,23 @@
-<svg [attr.width]="grid_width" [attr.height]="grid_height" (mousemove)="setTargetCell($event)"
-     xmlns="http://www.w3.org/2000/svg">
+<svg [attr.width]="grid_width" [attr.height]="grid_height" (mousemove)="setTargetCell($event)" xmlns="http://www.w3.org/2000/svg">
   <!-- Draw the grid as rectangles -->
   <g *ngFor="let column of columns; index as ci">
     <g *ngFor="let row of rows; index as ri">
-      <rect [attr.x]="grid_padding + ci * cell_width" [attr.y]="grid_padding + ri * cell_height"
-            [attr.width]="cell_width" [attr.height]="cell_height" fill="none" stroke="gray" stroke-width="1"
-      />
+      <rect [attr.x]="grid_padding + ci * cell_width" [attr.y]="grid_padding + ri * cell_height" [attr.width]="cell_width" [attr.height]="cell_height"
+        fill="none" stroke="gray" stroke-width="1" />
       <!-- Blue Text -->
-      <text [attr.x]="grid_padding+grid_padding/1.5 + ci * cell_width"
-            [attr.y]="grid_padding+grid_padding + ri * cell_height"
-            text-anchor="middle" font-family="Verdana" font-size="10" fill="blue">{{getDefaultCellData(ci,ri)}}
+      <text [attr.x]="grid_padding+grid_padding/1.5 + ci * cell_width" [attr.y]="grid_padding+grid_padding + ri * cell_height"
+        text-anchor="middle" font-family="Verdana" font-size="10" fill="blue">{{getNumaricPattern(ci,ri)}}
       </text>
     </g>
   </g>
   <g *ngIf="showNumberPopup()">
     <!-- Yellow Overlap Rectangle -->
-    <rect [attr.x]="grid_padding - overlap_padding + focused_column * cell_width"
-          [attr.y]="grid_padding - overlap_padding + focused_row * cell_height"
-          [attr.width]="cell_width + 2 * overlap_padding" [attr.height]="cell_height + 2 * overlap_padding"
-          fill="white" stroke="black" stroke-width="1"
-    />
+    <rect [attr.x]="grid_padding - overlap_padding + focused_column * cell_width" [attr.y]="grid_padding - overlap_padding + focused_row * cell_height"
+      [attr.width]="cell_width + 2 * overlap_padding" [attr.height]="cell_height + 2 * overlap_padding" fill="white" stroke="black"
+      stroke-width="1" />
     <!-- Blue Text -->
-    <text [attr.x]="grid_padding + (focused_column + 0.5) * cell_width"
-          [attr.y]="grid_padding + (focused_row + 0.75) * cell_height"
-          text-anchor="middle" font-family="Verdana" font-size="24" fill="blue">{{getTargetCellData()}}
+    <text [attr.x]="grid_padding + (focused_column + 0.5) * cell_width" [attr.y]="grid_padding + (focused_row + 0.75) * cell_height"
+      text-anchor="middle" font-family="Verdana" font-size="24" fill="blue">{{getTargetCellData()}}
     </text>
 
   </g>
@@ -31,10 +25,8 @@
 
 <!-- Text -------------------------------------------------------------------->
 <h4>Overlap View</h4>
-<p class="text-justify">Under this variant, when user moves the courser to the focused cell, the cell will enlarge and
-  overlap the surrounding cells to create focused view and expose the value mentioned in that cell to the user. This
-  variant is the easiest and simplest as per users point of view. This is user friendly as user can directly have
-  required information without any distractions.</p>
-<p class="text-justify">This variant avoids any kind of base distortion. Because as per paper [1] We identified popular
-  distortion techniques and the type of visualizations those distortions can be applied to and formalize why deception
-  occurs with those distortions.</p>
+<p class="text-justify">Under this variant, when user moves the courser to the focused cell, the cell will enlarge and overlap the surrounding cells
+  to create focused view and expose the value mentioned in that cell to the user. This variant is the easiest and simplest
+  as per users point of view. This is user friendly as user can directly have required information without any distractions.</p>
+<p class="text-justify">This variant avoids any kind of base distortion. Because as per paper [1] We identified popular distortion techniques and
+  the type of visualizations those distortions can be applied to and formalize why deception occurs with those distortions.</p>
